@@ -13,7 +13,13 @@ static void Delay_Time_us(unsigned int Delay)
           for(Counts = Delay_Time; Counts > 0; Counts --);
     }
 }
-
+void Spi_Init(SPI_t *addr)
+{
+    GPIO_Init(SCK_PORT,(GPIO_Pin_TypeDef)addr->ui_SCK,GPIO_MODE_OUT_PP_HIGH_FAST);
+    GPIO_Init(MOSI_PORT,(GPIO_Pin_TypeDef)addr->ui_MOSI,GPIO_MODE_OUT_PP_HIGH_FAST);
+    GPIO_Init(MISO_PORT,(GPIO_Pin_TypeDef)addr->ui_MISO,GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(CS_PORT,(GPIO_Pin_TypeDef)addr->ui_CS,GPIO_MODE_OUT_PP_HIGH_FAST);
+}
 #ifdef spi_master                      //主机
 void Spi_Init(SPI_t *addr)
 {
@@ -174,6 +180,101 @@ void RevDataHandle(void)
         break;
     }
 }
+
+
+u8 SPI_RW(u8 data)
+{
+    u8 i;
+    //SPI_SCK_LOW;     //先将时钟线拉低
+    SPI_SCK_SET(0);
+    for(i=0;i<8;i++)
+    {   
+        if((data&0x80)==0x80)  //从高位发送
+        {
+            //SPI_MOSI_HIGH;
+            SPI_MOSI_SET(1);
+        }
+        else
+        {
+            //SPI_MOSI_LOW;
+            SPI_MOSI_SET(0);
+        }
+        //SPI_SCK_HIGH;  //将时钟线拉高，在时钟上升沿，数据发送到从设备
+        SPI_SCK_SET(1);
+        data <<= 1;
+
+        if(SPI_MOSI_Read())   //读取从设备发射的数据
+        {
+            data|=0x01;     
+        }
+        //SPI_SCK_LOW;     //在下降沿数据被读取到主机
+        SPI_SCK_SET(0);
+    }
+
+    return data;         //返回读取到的数据
+}
+
+//读寄存器操作：
+u8 SPI_Moni_Read_Reg(u8 Reg)
+{
+    u8 data;
+
+    //SPI_CS_LOW;
+    SPI_CS_SET(0);
+
+    SPI_RW(Reg);   //先写入寄存器的地址
+
+    data=SPI_RW(0); //通过写入无效数据0，将从设备上的数据挤出来
+
+    //SPI_CS_HIGH;
+    SPI_CS_SET(1);
+
+    return data;
+}
+//接下来就是写缓冲区、读缓冲区函数 了：
+u8 SPI_Moni_Write_Buf(u8 Reg,u8 *Buf,u8 len)
+{
+    u8 states;
+
+    //SPI_CS_LOW;
+    SPI_CS_SET(0);
+
+    states=SPI_RW(Reg);
+
+    while(len > 0)
+    {
+        SPI_RW(*Buf);
+        Buf ++;
+        len --;
+    }
+    //SPI_CS_HIGH;
+    SPI_CS_SET(1);
+
+    return states;
+}
+
+u8 SPI_Moni_Read_Buf(u8 Reg,u8 *Buf,u8 len)
+{
+    u8 states;
+
+    //SPI_CS_LOW;
+    SPI_CS_SET(0);
+
+    states=SPI_RW(Reg);
+
+    while(len>0)
+    {
+        *Buf=SPI_RW(0);
+        Buf ++;
+        len --;
+    }
+
+    //SPI_CS_HIGH;
+    SPI_CS_SET(1);
+
+    return states;
+}
+
 
 
 

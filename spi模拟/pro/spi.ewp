@@ -190,7 +190,6 @@
                     <name>CCDefines</name>
                     <state>STM8S103</state>
                     <state>USE_STDPERIPH_DRIVER</state>
-                    <state>spi_slave</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
@@ -258,11 +257,11 @@
                 </option>
                 <option>
                     <name>CCIncludePath2</name>
-                    <state>C:\Users\Administrator\Desktop\spi\24L01</state>
-                    <state>C:\Users\Administrator\Desktop\spi\bsp</state>
-                    <state>C:\Users\Administrator\Desktop\spi\lib\inc</state>
-                    <state>C:\Users\Administrator\Desktop\spi\TimeOut</state>
-                    <state>C:\Users\Administrator\Desktop\spi\user</state>
+                    <state>C:\Users\Administrator\Desktop\spi_string\spi模拟\24L01</state>
+                    <state>C:\Users\Administrator\Desktop\spi_string\spi模拟\bsp</state>
+                    <state>C:\Users\Administrator\Desktop\spi_string\spi模拟\lib\inc</state>
+                    <state>C:\Users\Administrator\Desktop\spi_string\spi模拟\TimeOut</state>
+                    <state>C:\Users\Administrator\Desktop\spi_string\spi模拟\user</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>

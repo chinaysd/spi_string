@@ -71,5 +71,7 @@ unsigned char Simulate_Spi_Write_Data(unsigned char addr,unsigned char id,unsign
 
 void RevDataHandle(void);
 
+u8 SPI_Moni_Write_Buf(u8 Reg,u8 *Buf,u8 len);
+
 
 #endif

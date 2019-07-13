@@ -1,30 +1,30 @@
-"C:\Users\Administrator\Desktop\spi\lib\src\stm8s_clk.c"
+"C:\Users\Administrator\Desktop\spi_string\spi模拟\lib\src\stm8s_clk.c"
 -std=c99
 -ferror-limit=0
 -I
-C:\Users\Administrator\Desktop\spi\24L01
+C:\Users\Administrator\Desktop\spi_string\spi模拟\24L01
 -I
-C:\Users\Administrator\Desktop\spi\bsp
+C:\Users\Administrator\Desktop\spi_string\spi模拟\bsp
 -I
-C:\Users\Administrator\Desktop\spi\lib\inc
+C:\Users\Administrator\Desktop\spi_string\spi模拟\lib\inc
 -I
-C:\Users\Administrator\Desktop\spi\TimeOut
+C:\Users\Administrator\Desktop\spi_string\spi模拟\TimeOut
 -I
-C:\Users\Administrator\Desktop\spi\user
+C:\Users\Administrator\Desktop\spi_string\spi模拟\user
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\inc
 -I
 C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\inc\c
 -I
-C:\Users\Administrator\Desktop\spi\24L01
+C:\Users\Administrator\Desktop\spi_string\spi模拟\24L01
 -I
-C:\Users\Administrator\Desktop\spi\bsp
+C:\Users\Administrator\Desktop\spi_string\spi模拟\bsp
 -I
-C:\Users\Administrator\Desktop\spi\lib\inc
+C:\Users\Administrator\Desktop\spi_string\spi模拟\lib\inc
 -I
-C:\Users\Administrator\Desktop\spi\TimeOut
+C:\Users\Administrator\Desktop\spi_string\spi模拟\TimeOut
 -I
-C:\Users\Administrator\Desktop\spi\user
+C:\Users\Administrator\Desktop\spi_string\spi模拟\user
 -D__CHAR_BITS__=8
 -D__CHAR_MAX__=0xff
 -D__CHAR_MIN__=0
@@ -271,7 +271,6 @@ C:\Users\Administrator\Desktop\spi\user
 -D__EDG_CPP11_IL_EXTENSIONS_SUPPORTED=1
 -DSTM8S103=1
 -DUSE_STDPERIPH_DRIVER=1
--Dspi_slave=1
 -D_DLIB_CONFIG_FILE_HEADER_NAME="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\LIB\dlstm8smn.h"
 -D_DLIB_CONFIG_FILE_STRING="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.0\\stm8\\LIB\\dlstm8smn.h"
 -D__VERSION__="IAR C/C++ Compiler V3.10.1.201 for STM8"
