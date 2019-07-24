@@ -271,6 +271,7 @@ C:\Users\Administrator\Desktop\spi_string\spi模拟\user
 -D__EDG_CPP11_IL_EXTENSIONS_SUPPORTED=1
 -DSTM8S103=1
 -DUSE_STDPERIPH_DRIVER=1
+-Dspi_slave=1
 -D_DLIB_CONFIG_FILE_HEADER_NAME="C:\Program Files (x86)\IAR Systems\Embedded Workbench 8.0\stm8\LIB\dlstm8smn.h"
 -D_DLIB_CONFIG_FILE_STRING="C:\\Program Files (x86)\\IAR Systems\\Embedded Workbench 8.0\\stm8\\LIB\\dlstm8smn.h"
 -D__VERSION__="IAR C/C++ Compiler V3.10.1.201 for STM8"

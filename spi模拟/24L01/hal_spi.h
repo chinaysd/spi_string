@@ -10,19 +10,20 @@
 #define MISO_PORT  GPIOC
 #define CS_PORT    GPIOA
 
-#define SCK_PIN    GPIO_PIN_5
-#define MOSI_PIN   GPIO_PIN_6
-#define MISO_PIN   GPIO_PIN_7  
-#define CS_PIN     GPIO_PIN_3
+#define SCK_PIN    GPIO_PIN_4
+#define MOSI_PIN   GPIO_PIN_5
+#define MISO_PIN   GPIO_PIN_6  
+#define CS_PIN     GPIO_PIN_7
 
 #define SPI_SCK_SET(X)    ((X)?(GPIO_WriteHigh(SCK_PORT,SCK_PIN)):(GPIO_WriteLow(SCK_PORT,SCK_PIN)))
 #define SPI_MOSI_SET(X)   ((X)?(GPIO_WriteHigh(MOSI_PORT,MOSI_PIN)):(GPIO_WriteLow(MOSI_PORT,MOSI_PIN)))
 #define SPI_MISO_SET(X)   ((X)?(GPIO_WriteHigh(MISO_PORT,MISO_PIN)):(GPIO_WriteLow(MISO_PORT,MISO_PIN)))
 #define SPI_MOSI_Read()   GPIO_ReadInputPin(MOSI_PORT,MOSI_PIN)
+#define SPI_CS_Read()     GPIO_ReadInputPin(CS_PORT,CS_PIN)
 
 #define SPI_CS_SET(X)     ((X)?(GPIO_WriteHigh(CS_PORT,CS_PIN)):(GPIO_WriteLow(CS_PORT,CS_PIN)))
 
-#define Delay_Time 0
+#define Delay_Time 3
 #define DataSize   7
 #define Hight(x)   (((x)>>8)&0xff)
 #define Low(x)      (x)

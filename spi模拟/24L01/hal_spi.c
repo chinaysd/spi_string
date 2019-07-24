@@ -13,6 +13,7 @@ static void Delay_Time_us(unsigned int Delay)
           for(Counts = Delay_Time; Counts > 0; Counts --);
     }
 }
+#if 0
 void Spi_Init(SPI_t *addr)
 {
     GPIO_Init(SCK_PORT,(GPIO_Pin_TypeDef)addr->ui_SCK,GPIO_MODE_OUT_PP_HIGH_FAST);
@@ -20,6 +21,7 @@ void Spi_Init(SPI_t *addr)
     GPIO_Init(MISO_PORT,(GPIO_Pin_TypeDef)addr->ui_MISO,GPIO_MODE_IN_FL_NO_IT);
     GPIO_Init(CS_PORT,(GPIO_Pin_TypeDef)addr->ui_CS,GPIO_MODE_OUT_PP_HIGH_FAST);
 }
+#endif
 #ifdef spi_master                      //主机
 void Spi_Init(SPI_t *addr)
 {
@@ -34,8 +36,8 @@ void Spi_Init(SPI_t *addr)
 {
     GPIO_Init(SCK_PORT,(GPIO_Pin_TypeDef)addr->ui_SCK,GPIO_MODE_IN_FL_NO_IT);
     GPIO_Init(MOSI_PORT,(GPIO_Pin_TypeDef)addr->ui_MOSI,GPIO_MODE_IN_FL_NO_IT);//GPIO_MODE_IN_FL_NO_IT
-    GPIO_Init(MISO_PORT,(GPIO_Pin_TypeDef)addr->ui_MISO,GPIO_MODE_IN_FL_NO_IT);     //GPIO_MODE_OUT_PP_HIGH_FAST
-    GPIO_Init(CS_PORT,(GPIO_Pin_TypeDef)addr->ui_CS,GPIO_MODE_IN_FL_NO_IT);
+    GPIO_Init(MISO_PORT,(GPIO_Pin_TypeDef)addr->ui_MISO,GPIO_MODE_OUT_PP_HIGH_FAST);     //
+    GPIO_Init(CS_PORT,(GPIO_Pin_TypeDef)addr->ui_CS,GPIO_MODE_IN_PU_NO_IT);
 }
 #endif
 
@@ -66,7 +68,9 @@ static unsigned char Simulate_Spi_Write_ByteHandle(SPI_PROTOCOL_t *p)
      
      for(i = 0 ; i < DataSize; i ++)
      {
+         SPI_CS_SET(0);
          Simulate_Spi_Write_Byte(p->SPI_Buf[i]);
+         SPI_CS_SET(1);
      }
      return 0;
 }
@@ -91,7 +95,8 @@ unsigned char Simulate_Spi_Read_Byte(void)
     SPI_CS_SET(0);
     SPI_SCK_SET(0);
     Delay_Time_us(Delay_Time);
-    for(kk = 0; kk < 8 ; kk ++){
+    if(!SPI_CS_Read()){
+       for(kk = 0; kk < 8 ; kk ++){
         SPI_SCK_SET(1);
         if(SPI_MOSI_Read()){
            ret |= 0x01;
@@ -100,6 +105,7 @@ unsigned char Simulate_Spi_Read_Byte(void)
         SPI_SCK_SET(0);
         Delay_Time_us(Delay_Time);
         ret = ret << 1;
+        }
     }
     SPI_CS_SET(1);
     return ret;
@@ -117,9 +123,9 @@ static unsigned char RevComplete(void)
 
 static void RevProcessHandle(void)
 {
-    static unsigned char CntsTemp;
+    //static unsigned char CntsTemp;
     RevData = Simulate_Spi_Read_Byte();
-    #if 1
+    #if 0
     if(RevData == 0xfa){
        ++ CntsTemp;
        if(CntsTemp & 0x01){
@@ -144,11 +150,11 @@ static void RevProcessHandle(void)
               RevNum ++;
               if(RevString[0] != 0xFA){
                  RevNum = 0x00;
-                 //memset(&RevString,0,sizeof(RevString));
+                 memset(&RevString,0,sizeof(RevString));
               }
               if(RevNum > RevDataSize){
                  RevNum = 0x00;
-                 //memset(&RevString,0,sizeof(RevString));
+                 memset(&RevString,0,sizeof(RevString));
               }
            }
         }

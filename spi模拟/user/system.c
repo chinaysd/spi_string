@@ -21,19 +21,21 @@ void System_Init(void)
 
 void System_Handle(void)
 {
-    static unsigned char Cnts;
-    if(TimeOutDet_Check(&TimeOut_Para[0])){
-       TimeOut_Record(&TimeOut_Para[0],1);
+    //static unsigned char Cnts;
+    //if(TimeOutDet_Check(&TimeOut_Para[0])){
+    //   TimeOut_Record(&TimeOut_Para[0],1);
         #ifdef spi_master      //主机发送
         Simulate_Spi_Write_Data(0xfa,0xfb,0x1101);
         #endif
+        #if 0
         for(Cnts = 0; Cnts < 7; Cnts ++){
         SPI_Moni_Write_Buf(0xfa,&UC_Buf[Cnts],7);
         }
         if(Cnts == 7){
         Cnts = 0;
         }
-    }
+        #endif
+    //}
     #ifdef spi_slave       //从机接收
     RevDataHandle();       
     #endif

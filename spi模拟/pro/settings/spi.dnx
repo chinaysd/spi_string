@@ -49,7 +49,7 @@
         <MultiCoreRunAll>1</MultiCoreRunAll>
     </Simulator>
     <DebugChecksum>
-        <Checksum>1001518684</Checksum>
+        <Checksum>860190447</Checksum>
     </DebugChecksum>
     <CallStack>
         <ShowArgs>0</ShowArgs>
@@ -69,7 +69,7 @@
         <LogFile>_ ""</LogFile>
     </TermIOLog>
     <Breakpoints>
-        <Bp0>_ "STD_CODE" "{$PROJ_DIR$\..\24L01\hal_spi.c}.189.5" 0 0 0 0 "" 0 ""</Bp0>
+        <Bp0>_ "STD_CODE" "{$PROJ_DIR$\..\24L01\hal_spi.c}.189.1" 0 0 0 0 "" 0 ""</Bp0>
         <Count>1</Count>
     </Breakpoints>
     <Aliases>

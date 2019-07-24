@@ -190,6 +190,7 @@
                     <name>CCDefines</name>
                     <state>STM8S103</state>
                     <state>USE_STDPERIPH_DRIVER</state>
+                    <state>spi_slave</state>
                 </option>
                 <option>
                     <name>CCPreprocFile</name>
